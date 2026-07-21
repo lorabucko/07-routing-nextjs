@@ -23,4 +23,4 @@ NoteHub app - застосунок для зберігання, створенн
 
 https://notehub-public.goit.study/api/docs
 
-<img width="838" height="835" alt="NoteHub App2" src="https://github.com/user-attachments/assets/b56d9549-3758-46da-b6e9-a850f3951ccc" />
+<img width="980" height="835" alt="NoteHub App2" src="https://github.com/user-attachments/assets/b56d9549-3758-46da-b6e9-a850f3951ccc" />
