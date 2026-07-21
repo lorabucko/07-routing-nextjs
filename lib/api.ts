@@ -9,11 +9,13 @@ const noteHubApi = axios.create({
     Authorization: `Bearer ${token}`,
   },
 })
+type TagFilter = NoteTag | 'all'
 
 export interface FetchNotesParams {
   page: number
   perPage: number
   search?: string
+  tag?: TagFilter
 }
 
 export interface FetchNotesResponse {
@@ -31,13 +33,23 @@ export const fetchNotes = async ({
   page,
   perPage,
   search,
+  tag,
 }: FetchNotesParams): Promise<FetchNotesResponse> => {
+  const params: Record<string, string | number> = {
+    page,
+    perPage,
+  }
+
+  if (search) {
+    params.search = search
+  }
+
+  if (tag && tag !== 'all') {
+    params.tag = tag
+  }
+
   const { data } = await noteHubApi.get<FetchNotesResponse>('/notes', {
-    params: {
-      page,
-      perPage,
-      ...(search ? { search } : {}),
-    },
+    params,
   })
 
   return data
