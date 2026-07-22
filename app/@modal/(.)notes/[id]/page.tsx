@@ -4,14 +4,15 @@ import { fetchNoteById } from '@/lib/api'
 import NotePreviewClient from '@/components/NotePreview/NotePreview.client'
 
 type PageProps = {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export default async function NotePreviewPage({ params }: PageProps) {
   const queryClient = new QueryClient()
-  const noteId = params.id
+  const resolvedParams = await params
+  const noteId = resolvedParams.id
 
   await queryClient.prefetchQuery({
     queryKey: ['note', noteId],

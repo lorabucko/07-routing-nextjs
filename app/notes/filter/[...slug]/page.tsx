@@ -9,9 +9,9 @@ const PER_PAGE = 12
 type TagFilter = NoteTag | 'all'
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug?: string[]
-  }
+  }>
 }
 
 export default async function NotesFilterPage({ params }: PageProps) {
@@ -20,7 +20,8 @@ export default async function NotesFilterPage({ params }: PageProps) {
   const initialPage = 1
   const initialSearch = ''
 
-  const slug = params.slug ?? ['all']
+  const resolvedParams = await params
+  const slug = resolvedParams.slug ?? ['all']
 
   const rawTag = slug[0] ?? 'all'
   const tagFromSlug: TagFilter = rawTag as TagFilter
